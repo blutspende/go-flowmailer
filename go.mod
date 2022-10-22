@@ -1,4 +1,4 @@
-module go-flowmailer
+module github.com/DRK-Blutspende-BaWueHe/go-flowmailer
 
 go 1.18
 
@@ -7,4 +7,6 @@ require (
 	github.com/google/uuid v1.3.0
 )
 
-require golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
+require (
+	golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
+)
