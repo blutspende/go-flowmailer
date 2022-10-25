@@ -16,6 +16,13 @@ type Flowmailer interface {
 	//   - nil if nor error occurs
 	GetMessagesHeld(from, until time.Time, rangemin, rangemax int) ([]MessageHold, int, error)
 
+	// Get a list of the messages by source
+	// Returns:
+	//   - List of Messages
+	//   - Count of Items in total (not only the pagination window)
+	//   - nil if nor error occurs
+	GetMessagesBySource(sourceid int, from, until time.Time, rangemin, rangemax int) ([]Message, int, error)
+
 	// Get a message that was archived by a flow (required if you want the attachment)
 	GetMessageFromArchiveById(id string) ([]MessageArchive, error)
 

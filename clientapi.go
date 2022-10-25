@@ -95,6 +95,48 @@ func (fm *flowmailer) GetMessages(from, until time.Time, rangemin, rangemax int)
 	}
 }
 
+func (fm *flowmailer) GetMessagesBySource(sourceid int, from, until time.Time, rangemin, rangemax int) ([]Message, int, error) {
+
+	resp, err := fm.client.R().
+		EnableTrace().
+		SetHeader("Authorization", fmt.Sprintf("Bearer %s", fm.token)).
+		SetHeader("Accept", "application/vnd.flowmailer.v1.12+json;charset=UTF-8").
+		SetHeader("Range", fmt.Sprintf("items=%d-%d", rangemin, rangemax)).
+		Get(fmt.Sprintf("https://api.flowmailer.net/%d/sources/%d/messages;daterange=%s,%s?addevents=true&addtags=true",
+			fm.account_id,
+			sourceid,
+			from.Format("2006-01-02T15:04:05-0700"),
+			until.Format("2006-01-02T15:04:05-0700")))
+
+	if err != nil {
+		return nil, 0, err
+	}
+
+	switch resp.StatusCode() {
+	case 206: // Partial Content
+		message := make([]Message, 0)
+		err := json.Unmarshal(resp.Body(), &message)
+		if err != nil {
+			return nil, 0, err
+		}
+		maxPage := len(message)
+		contentRange := resp.Header().Get("Content-Range")
+
+		if strings.Contains(contentRange, "/") {
+			maxPage, _ = strconv.Atoi(strings.Split(contentRange, "/")[1])
+		}
+		return message, maxPage, nil
+	case 401:
+		err := fm.Login()
+		if err != nil {
+			return nil, 0, err
+		}
+		return fm.GetMessagesBySource(sourceid, from, until, rangemin, rangemax)
+	default:
+		return nil, 0, fmt.Errorf("unexpected return-code %d", resp.StatusCode())
+	}
+}
+
 func (fm *flowmailer) GetMessagesHeld(from, until time.Time, rangemin, rangemax int) ([]MessageHold, int, error) {
 
 	resp, err := fm.client.R().
