@@ -19,7 +19,7 @@ func main() {
 	// attachment.Disposition = DISPOSITION_ATTACHMENT
 	attachments = append(attachments, attachment)
 
-	err := fm.SubmitEmail("kuhr@posteo.de", "stephan Kuhr", "s.kuhr@blutspende.de", "Stephan Kuhr", "Subject is this", "textbody", "htmlbody", attachments)
+	err := fm.SubmitEmail("kuhr@posteo.de", "stephan Kuhr", "test@bsd-screeninglabor.de", "Stephan Kuhr", "Subject is this", "textbody", "htmlbody", attachments)
 	if err != nil {
 		fmt.Println(err.Error())
 	}

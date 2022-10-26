@@ -297,9 +297,13 @@ func (fm *flowmailer) GetAttachmentFromArchiveMessage(messageId, flowStepId, con
 
 }
 
-func New(account_id int, client_id, client_secret string) Flowmailer {
+func New(account_id int, client_id, client_secret, proxy string) Flowmailer {
+	r := resty.New()
+	if proxy != "" {
+		r.SetProxy(proxy)
+	}
 	return &flowmailer{
-		client:        resty.New(),
+		client:        r,
 		client_id:     client_id,
 		client_secret: client_secret,
 		account_id:    account_id,
