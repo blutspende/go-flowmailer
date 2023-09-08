@@ -1,5 +1,3 @@
-github.com/DRK-Blutspende-BaWueHe/go-binfile v0.0.13 h1:RQK9BP+6+jiQlbC3fVZ+g9Om+qF4Tusg84+J52M0pZI=
-github.com/DRK-Blutspende-BaWueHe/go-binfile v0.0.13/go.mod h1:3fxbcqye9qQ+uvBYcybcwGx5bR2051hEq/lob7Nx9Lo=
 github.com/go-resty/resty/v2 v2.7.0 h1:me+K9p3uhSmXtrBZ4k9jcEAfJmuC8IivWHwaLZwPrFY=
 github.com/go-resty/resty/v2 v2.7.0/go.mod h1:9PWDzw47qPphMRFfhsyk0NnSgvluHcljSMVIq3w7q0I=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=

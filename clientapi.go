@@ -180,7 +180,7 @@ func (fm *flowmailer) GetMessagesHeld(from, until time.Time, rangemin, rangemax 
 
 func (fm *flowmailer) SubmitEmail(toEmail, toName, fromEmail, fromName, subject, textBody, htmlBody string, attachments []Attachment) error {
 
-	for i, _ := range attachments {
+	for i := range attachments {
 		if attachments[i].ContentType == "" {
 			attachments[i].ContentType = "application/octet-stream"
 		}
@@ -218,6 +218,8 @@ func (fm *flowmailer) SubmitEmail(toEmail, toName, fromEmail, fromName, subject,
 	switch resp.StatusCode() {
 	case 201:
 		return nil
+	case 400:
+		return fmt.Errorf("failed to send %s", resp.Body())
 	case 401:
 		err := fm.Login()
 		if err != nil {
