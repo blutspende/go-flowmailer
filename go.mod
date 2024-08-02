@@ -1,4 +1,4 @@
-module github.com/DRK-Blutspende-BaWueHe/go-flowmailer
+module github.com/blutspende/go-flowmailer
 
 go 1.18
 
