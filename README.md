@@ -6,4 +6,4 @@ Main Features
   - Receive messages from Flow (with attachments) 
 
 ## Add go-flowmailer to your project
-´´´go get github.com/DRK-Blutspende-BaWueHe/go-binfile´´´
+´´´go get github.com/blutspende/go-binfile´´´

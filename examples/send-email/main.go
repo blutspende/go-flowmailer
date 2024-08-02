@@ -4,7 +4,7 @@ import (
 	b64 "encoding/base64"
 	"fmt"
 
-	flowmailer "github.com/DRK-Blutspende-BaWueHe/go-flowmailer"
+	flowmailer "github.com/blutspende/go-flowmailer"
 )
 
 func main() {
